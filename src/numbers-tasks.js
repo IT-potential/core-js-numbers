@@ -615,7 +615,8 @@ function getRandomInteger(min, max) {
  */
 function getHypotenuse(a, b) {
   const result = Math.sqrt(a ** 2 + b ** 2);
-  return Number(result.toPrecision(14));  // Преобразуем обратно в число
+  return Number(result.toPrecision(14));
+  // Преобразуем обратно в число
 }
 
 /**
@@ -632,11 +633,10 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-   // Преобразуем в абсолютное значение, потому что нечётные числа одинаковы как для положительных, так и для отрицательных чисел
-   number = Math.abs(number);
-   // Если число четное, то делим его на 2, если нечётное - делим на 2 и добавляем 1
-   return Math.floor(number / 2) + 1;
- }
+  // Преобразуем в абсолютное значение, потому что нечётные числа одинаковы как для положительных, так и для отрицательных чисел
+  const absNumber = Math.abs(number);
+  // Если число четное, то делим его на 2, если нечётное - делим на 2 и добавляем 1
+  return Math.floor(absNumber / 2) + 1;
 }
 
 module.exports = {
