@@ -200,13 +200,12 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  if (!Number.isInteger(n) || n < 2) return false;
-  for (let devider = 2; devider <= Math.sqrt(n); devider += 1) {
-    if (n % devider === 0) {
-      return false; // Если находим делитель, то число не простое
+  for (let i = 2; i <= Math.sqrt(n); i += 1) {
+    if (n % i === 0) {
+      return false;
     }
   }
-  return true; // Если делителей нет, то число простое
+  return true;
 }
 
 /**
@@ -301,13 +300,12 @@ function getSumToN(n) {
  *   5   => 5  // 5
  */
 function getSumOfDigits(num) {
-  let sum = 0;
-  let temp = num;
-  while (temp > 0) {
-    sum += temp % 10; // Берем последнюю цифру
-    temp = Math.floor(temp / 10); // Убираем последнюю цифру
-  }
-  return sum;
+  return num
+    .toString()
+    .split('')
+    .reduce((acc, value) => {
+      return acc + +value;
+    }, 0);
 }
 
 /**
@@ -368,7 +366,7 @@ function numberToStringInBase(number, base) {
  * 12345, 2    => '1.23e+4'
  */
 function toExponential(number, fractionDigits) {
-  return number.toExponential([fractionDigits]);
+  return number.toExponential(fractionDigits);
 }
 
 /**
@@ -413,7 +411,7 @@ function toPrecision(number, precision) {
  * Number(-5)    => -5
  */
 function getNumberValue(number) {
-  return Number(number);
+  return number.valueOf();
 }
 
 /**
@@ -461,7 +459,7 @@ function isInteger(number) {
  * 'abcdefgh'      => NaN
  */
 function getFloatOnString(str) {
-  return parseFloat(str);
+  return Number.parseFloat(str);
 }
 
 /**
@@ -479,7 +477,7 @@ function getFloatOnString(str) {
  * '10', 8              => 8
  */
 function getIntegerOnString(str, base) {
-  return parseInt(str, base);
+  return Number.parseInt(str, base);
 }
 
 /**
@@ -568,7 +566,7 @@ function getIntegerPartNumber(number) {
  * 0.1, 0.2, 0.3 => 0.6
  */
 function getSumOfNumbers(x1, x2, x3) {
-  return x1 + x2 + x3;
+  return (x1 * 100 + x2 * 100 + x3 * 100) / 100;
 }
 
 /**
@@ -584,7 +582,7 @@ function getSumOfNumbers(x1, x2, x3) {
  * 0, 5   => 5
  */
 function getMaxNumber(firstNumber, secondNumber) {
-  return firstNumber > secondNumber ? firstNumber : secondNumber;
+  return Math.max(firstNumber, secondNumber);
 }
 
 /**
@@ -614,9 +612,7 @@ function getRandomInteger(min, max) {
  * 3, 4 => 5
  */
 function getHypotenuse(a, b) {
-  const result = Math.sqrt(a ** 2 + b ** 2);
-  return Number(result.toPrecision(14));
-  // Преобразуем обратно в число
+  return Math.hypot(a, b);
 }
 
 /**
@@ -633,10 +629,7 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  // Преобразуем в абсолютное значение, потому что нечётные числа одинаковы как для положительных, так и для отрицательных чисел
-  const absNumber = Math.abs(number);
-  // Если число четное, то делим его на 2, если нечётное - делим на 2 и добавляем 1
-  return Math.floor(absNumber / 2) + 1;
+  return number % 2 === 0 ? Math.abs(number) / 2 : (Math.abs(number) + 1) / 2;
 }
 
 module.exports = {
